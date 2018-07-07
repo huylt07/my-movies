@@ -32,7 +32,7 @@ body {
 
 h1 {
     width: 100%;
-    background-color: blue;
+    background-color: #1D6A96;
     color: white;
     padding: 20px;
     margin: 0 0 20px;
@@ -63,6 +63,10 @@ li:nth-child(even) {
 
 .nav button {
     font-size: 18px;
+}
+
+.nav button.active, .nav button:hover {
+    color: #BC5F6A
 }
 
 .container {

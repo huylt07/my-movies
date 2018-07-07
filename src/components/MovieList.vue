@@ -1,8 +1,8 @@
 <template>
   <div class="container">
     <div class="nav">
-      <button @click="imdbAsc()">Lowest rated</button> -
-      <button @click="imdbDesc()">Highest rated</button>
+      <button @click="imdbAsc()" :class="this.sortType === 'asc' ? 'active' : '' ">Lowest rated</button> -
+      <button @click="imdbDesc()" :class="this.sortType === 'desc' ? 'active' : '' ">Highest rated</button>
     </div>
     <ul>
       <li>
@@ -32,7 +32,7 @@ export default {
     let responseJson = await response.json()
     let movieList = responseJson.results
 
-    self.movies = await Promise.all(movieList.map(async i => {
+    Promise.all(movieList.map(async i => {
       let movieName = i.title
 
       response = await fetch(`http://www.omdbapi.com/?t=${movieName}&apikey=45eb48de`)
@@ -41,7 +41,9 @@ export default {
       let imdb = parseFloat(responseJson.imdbRating)
       i.imdb = isNaN(imdb) ? 0 : imdb
       return i
-    }))
+    })).then(list => {
+      self.movies = list.splice(0, 15)
+    })
   },
   methods: {
     imdbAsc () {
