@@ -1,0 +1,70 @@
+body {
+    color: #171717;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100vw;
+    height: 100vh;
+}
+
+#app {
+    font-family: 'Source Serif Pro', serif;
+    font-size: 24px;
+}
+
+#app {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#app {
+    flex-direction: column;
+    height: auto;
+    max-width: 500px;
+}
+
+body {
+    height: auto;
+}
+
+h1 {
+    width: 100%;
+    background-color: blue;
+    color: white;
+    padding: 20px;
+    margin: 0 0 20px;
+    text-align: center;
+}
+
+ul {
+    width: 100%;
+    margin-bottom: 100px;
+}
+
+li {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    font-size: 16px;
+    padding: 5px;
+}
+
+li:nth-child(even) {
+    background-color: #efefef;
+}
+
+.nav {
+    margin: 0 0 20px;
+    text-align: center;
+}
+
+.nav button {
+    font-size: 18px;
+}
+
+.container {
+    width: 100%;
+}
