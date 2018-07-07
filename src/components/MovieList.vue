@@ -1,14 +1,14 @@
 <template>
   <div class="container">
     <div class="nav">
-      <button>Lowest rated</button> -
-      <button>Highest rated</button>
+      <button @click="imdbAsc()">Lowest rated</button> -
+      <button @click="imdbDesc()">Highest rated</button>
     </div>
     <ul>
       <li>
           <strong>Movie name</strong> <strong><span>Movie rating</span></strong>
       </li>
-      <li v-for="(movie, index) in this.movies" :key="index" v-if="index < 15">
+      <li v-for="(movie, index) in getMovieList" :key="index" v-if="index < 15">
           {{ movie.title }} <span>{{ movie.imdb }}</span>
       </li>
     </ul>
@@ -21,6 +21,7 @@ export default {
   data () {
     return {
       msg: 'Welcome to Your Vue.js App',
+      sortType: '',
       movies: []
     }
   },
@@ -37,9 +38,33 @@ export default {
       response = await fetch(`http://www.omdbapi.com/?t=${movieName}&apikey=45eb48de`)
       responseJson = await response.json()
 
-      i.imdb = parseFloat(responseJson.imdbRating)
+      let imdb = parseFloat(responseJson.imdbRating)
+      i.imdb = isNaN(imdb) ? 0 : imdb
       return i
     }))
+  },
+  methods: {
+    imdbAsc () {
+      this.sortType = 'asc'
+    },
+    imdbDesc () {
+      this.sortType = 'desc'
+    },
+    compare (a, b) {
+      if (this.sortType === 'asc') {
+        return a.imdb - b.imdb
+      }
+      return b.imdb - a.imdb
+    }
+  },
+  computed: {
+    getMovieList () {
+      let temp = this.movies
+      if (this.sortType !== '') {
+        return temp.sort(this.compare)
+      }
+      return temp
+    }
   }
 }
 </script>
