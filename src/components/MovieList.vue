@@ -6,9 +6,9 @@
     </div>
     <ul>
       <li>
-          <strong>Movie name</strong> <strong><span>Movie rating</span></strong>
+          <strong><button @click="toggleSortByName()">Movie name</button></strong> <strong><span>Movie rating</span></strong>
       </li>
-      <li v-for="(movie, index) in getMovieList" :key="index" v-if="index < 15">
+      <li v-for="(movie, index) in getMovieList" :key="index" v-if="index < 15" :style="`background: rgb(29, 106, 150, ${movie.imdb / 10});`">
           {{ movie.title }} <span>{{ movie.imdb }}</span>
       </li>
     </ul>
@@ -22,6 +22,7 @@ export default {
     return {
       msg: 'Welcome to Your Vue.js App',
       sortType: '',
+      toggleNameFlag: true,
       movies: []
     }
   },
@@ -52,11 +53,24 @@ export default {
     imdbDesc () {
       this.sortType = 'desc'
     },
+    toggleSortByName () {
+      this.toggleNameFlag = !this.toggleNameFlag
+      this.sortType = ''
+    },
     compare (a, b) {
       if (this.sortType === 'asc') {
         return a.imdb - b.imdb
       }
       return b.imdb - a.imdb
+    },
+    compareName (a, b) {
+      if (a.title < b.title) {
+        return this.toggleNameFlag ? -1 : 1
+      }
+      if (a.title > b.title) {
+        return this.toggleNameFlag ? 1 : -1
+      }
+      return 0
     }
   },
   computed: {
@@ -65,7 +79,7 @@ export default {
       if (this.sortType !== '') {
         return temp.sort(this.compare)
       }
-      return temp
+      return temp.sort(this.compareName)
     }
   }
 }

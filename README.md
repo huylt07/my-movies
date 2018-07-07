@@ -1,6 +1,10 @@
 # movie-list
 
-> A Vue.js project
+> First name: Vinh
+> Last name: Giang
+> Email: giangcamvinh@gmail.com
+
+> This application will get the list of movie by themoviedb API which will be then merged with IMDB rate via omdbapi API. Finally, this data will be listed with the support from sorting features (by name, high IMDB rate, low IMDB rate)
 
 ## Build Setup
 
