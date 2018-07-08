@@ -17,5 +17,5 @@ export default {
 </script>
 
 <style>
-@import 'https://fonts.googleapis.com/css?family=Source+Serif+Pro'
+@import 'https://fonts.googleapis.com/css?family=Source+Serif+Pro';
 </style>
